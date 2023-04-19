@@ -1,0 +1,109 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Player = game.Players.LocalPlayer
+local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = true, IntroEnabled = false})
+
+OrionLib:MakeNotification({
+	Name = "Loged In",
+	Content = "You Are Loged In Sucsesfully as "..Player.Name.." ",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+--Values
+_G.Key = "ygz505"
+_G.KeyInput = "string"
+
+_G.autoDrop = true
+
+
+--Functions
+
+function autoDrop()
+	while _G.autoDrop == true do
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sw1ndlerScripts/RobloxScripts/main/Misc%20Scripts/DoubleDown.lua?raw=true"))()
+	end
+end
+
+function CorrectKeyNotification()
+	OrionLib:MakeNotification({
+	Name = "Correct Key!",
+	Content = "You have entered the correct key!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+end
+
+function IncorrectKeyNotification()
+	OrionLib:MakeNotification({
+	Name = "incorrect Key!",
+	Content = "You have entered the Incorrect key!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+end
+
+--FarmTabs
+
+local FarmTab = Window:MakeTab({
+	Name = "Key",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+FarmTab:AddTextbox({
+	Name = "Enter Key",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		_G.KeyInput = Value
+	end	  
+})
+
+FarmTab:AddButton({
+	Name = "Check Key",
+	Callback = function()
+      	if _G.KeyInput == _G.Key then
+  		MakeScriptHub()
+		CorrectKeyNotification()
+		else
+			IncorrectKeyNotification()
+		end
+	end    
+})
+
+
+--Başlangıç 2. Window
+
+function  MakeScriptHub()
+	local Window = OrionLib:MakeWindow({Name = "YznHub| [BACK] Double Down 🎲", HidePremium = false, SaveConfig = true, IntroEnabled = true, IntroText = "YznHub"})
+	local FarmTab = Window:MakeTab({
+	Name = "Block Drop",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+FarmTab:AddToggle({
+	Name = "Auto Drop",
+	Default = false,
+	Callback = function(Value)
+		_G.autoDrop = Value
+		autoDrop()
+	end    
+})
+	
+		local FarmTab = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+FarmTab:AddToggle({
+	Name = "UÇMAK FELAN",
+	Default = false,
+	Callback = function(Value)
+		_G.autoDrop = Value
+		autoDrop()
+	end    
+})
+
+end
